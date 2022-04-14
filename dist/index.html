@@ -6,6 +6,7 @@
         <script src="main.js"></script>
         <link href="main.css" rel="stylesheet"/>
         <title>vmstat visualizer</title>
+        <meta name="description" content="Vistat visualizer can visualize your vmstat log file. You can see how resources (CPU, Memory...) on your server are used in a time span."/>
     </head>
     <body>
         <main>
@@ -31,7 +32,7 @@
                     <h3>2. Upload vmstat.log</h3>
                     Upload "vmstat.log" you got from step 1.
                     <p>
-                        <input type="file" id="logfile_input"/>
+                        <input type="file" accept="text/plain,.log" id="logfile_input"/>
                     </p>
                     * The file you select is not actually uploaded to anywhere. It is processed locally on your computer.
                 </div>

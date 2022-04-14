@@ -6,6 +6,7 @@
         <script src="/main.js"></script>
         <link href="/main.css" rel="stylesheet"/>
         <title>vmstat visualizer</title>
+        <meta name="description" content="Vistat visualizerはvmstatのログファイルをグラフにして可視化することができます。サーバのリソース（CPUやメモリ等）の使用状況を時系列的に確認できます。"/>
     </head>
     <body>
         <main>
@@ -31,7 +32,7 @@
                     <h3>2. vmstat.logをアップロード</h3>
                     1. で取得した「vmstat.log」をアップロードします。
                     <p>
-                        <input type="file" id="logfile_input"/>
+                        <input type="file" accept="text/plain,.log" id="logfile_input"/>
                     </p>
                     ※実際にはどこにもアップロードされることは無く、ローカルコンピューター上でログファイルが処理されます。
                 </div>

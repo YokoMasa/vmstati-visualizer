@@ -6,7 +6,7 @@ export default class Presenter {
 
     static dateFormat = "yyyy-MM-dd'T'HH:mm:ss";
 
-    #view;
+    view;
 
     // timestamp
     #timestampData;
@@ -45,7 +45,10 @@ export default class Presenter {
 
     onFileSelect(file) {
         const self = this;
-        file.text().then(txt => self._processLog(txt));
+        file.text().then(txt => self._processLog(txt)).catch(err => {
+            console.log(err);
+            self.view.showAlert("Failed to parse log file.");
+        });
     }
 
     onStartTimeChange(time) {
@@ -61,37 +64,37 @@ export default class Presenter {
     onRangeReset() {
         this.#selectedStartTime = this.#timestampData[0];
         this.#selectedEndTime = this.#timestampData[this.#timestampData.length - 1];
-        this.#view.setStartTime(format(this.#timestampData[0], Presenter.dateFormat, { locale: enGB }));
-        this.#view.setEndTime(format(this.#timestampData[this.#timestampData.length - 1], Presenter.dateFormat, { locale: enGB }));
-        this.#view.hideVError();
+        this.view.setStartTime(format(this.#timestampData[0], Presenter.dateFormat, { locale: enGB }));
+        this.view.setEndTime(format(this.#timestampData[this.#timestampData.length - 1], Presenter.dateFormat, { locale: enGB }));
+        this.view.hideVError();
         this._updateChartDataRange();
     }
 
     setView(view) {
-        this.#view = view;
+        this.view = view;
     }
 
     _updateChartDataRange() {
         if (this.#selectedStartTime && this.#selectedEndTime && this.#selectedEndTime < this.#selectedStartTime) {
-            this.#view.showVError();
+            this.view.showVError();
             return;
         }
 
-        this.#view.hideVError();
+        this.view.hideVError();
 
         const start = this._findTimestampBoundIndex(this.#selectedStartTime, true);
         const end = this._findTimestampBoundIndex(this.#selectedEndTime, false) + 1;
 
         const timestampDataSliced = this.#timestampData.slice(start, end);
 
-        this.#view.updateCpuChart(timestampDataSliced, this.#usData.slice(start, end), this.#syData.slice(start, end), 
+        this.view.updateCpuChart(timestampDataSliced, this.#usData.slice(start, end), this.#syData.slice(start, end), 
             this.#idData.slice(start, end), this.#waData.slice(start, end), this.#stData.slice(start, end));
-        this.#view.updateMemChart(timestampDataSliced, this.#swpdData.slice(start, end), this.#freeData.slice(start, end), 
+        this.view.updateMemChart(timestampDataSliced, this.#swpdData.slice(start, end), this.#freeData.slice(start, end), 
             this.#inactData.slice(start, end), this.#activeData.slice(start, end));
-        this.#view.updateProcsChart(timestampDataSliced, this.#rData.slice(start, end), this.#bData.slice(start, end));
-        this.#view.updateIOChart(timestampDataSliced, this.#biData.slice(start, end), this.#boData.slice(start, end));
-        this.#view.updateSystemChart(timestampDataSliced, this.#inData.slice(start, end), this.#csData.slice(start, end));
-        this.#view.updateSwapChart(timestampDataSliced, this.#siData.slice(start, end), this.#soData.slice(start, end));
+        this.view.updateProcsChart(timestampDataSliced, this.#rData.slice(start, end), this.#bData.slice(start, end));
+        this.view.updateIOChart(timestampDataSliced, this.#biData.slice(start, end), this.#boData.slice(start, end));
+        this.view.updateSystemChart(timestampDataSliced, this.#inData.slice(start, end), this.#csData.slice(start, end));
+        this.view.updateSwapChart(timestampDataSliced, this.#siData.slice(start, end), this.#soData.slice(start, end));
     }
 
     _findTimestampBoundIndex(time, isLeft) {
@@ -215,22 +218,22 @@ export default class Presenter {
         }
 
         if (this.#soData.length === 0) {
-            this.#view.updateCpuChart([], [], [], [], [], []);
-            this.#view.updateMemChart([], [], [], [], []);
-            this.#view.updateProcsChart([], [], []);
-            this.#view.updateIOChart([], [], []);
-            this.#view.updateSystemChart([], [], []);
-            this.#view.updateSwapChart([], [], []);
-            this.#view.disableRangeInput();
-            this.#view.showAlert("Failed to parse log file.");
+            this.view.updateCpuChart([], [], [], [], [], []);
+            this.view.updateMemChart([], [], [], [], []);
+            this.view.updateProcsChart([], [], []);
+            this.view.updateIOChart([], [], []);
+            this.view.updateSystemChart([], [], []);
+            this.view.updateSwapChart([], [], []);
+            this.view.disableRangeInput();
+            this.view.showAlert("Failed to parse log file.");
             return;
         }
     
         this.#selectedStartTime = this.#timestampData[0];
         this.#selectedEndTime = this.#timestampData[this.#timestampData.length - 1];
-        this.#view.setStartTime(format(this.#timestampData[0], Presenter.dateFormat, { locale: enGB }));
-        this.#view.setEndTime(format(this.#timestampData[this.#timestampData.length - 1], Presenter.dateFormat, { locale: enGB }));
-        this.#view.enableRangeInput();
+        this.view.setStartTime(format(this.#timestampData[0], Presenter.dateFormat, { locale: enGB }));
+        this.view.setEndTime(format(this.#timestampData[this.#timestampData.length - 1], Presenter.dateFormat, { locale: enGB }));
+        this.view.enableRangeInput();
         this._updateChartDataRange();
     }
 
