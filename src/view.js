@@ -111,6 +111,8 @@ export default class View {
             },
             options: {
                 responsive: false,
+                animation: false,
+                spanGaps: true,
                 scales: {
                     x: {
                         type: 'time',
