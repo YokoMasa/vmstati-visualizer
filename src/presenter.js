@@ -123,7 +123,7 @@ export default class Presenter {
         let buffer = [];
         for (let i = 0; i < txt.length; i++) {
             const char = txt.charAt(i);
-            if (char === '\n' || char == '\r') {
+            if (char === '\n' || char === '\r') {
                 if (buffer.length === 0) {
                     continue;
                 }
