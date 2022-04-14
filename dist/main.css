@@ -1,10 +1,5 @@
-@font-face {
-    font-family: 'Noto Serif JP';
-    src: url("./NotoSerifJP-Regular.otf") format("opentype");
-}
-
 body {
-    font-family: 'Noto Serif JP', serif;
+    font-family: serif;
 }
 
 main {
@@ -35,6 +30,18 @@ code {
     border: 1px solid #ddd;
     padding: 10px;
     margin: 10px 0;
+}
+
+.loading {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
 }
 
 .description {
