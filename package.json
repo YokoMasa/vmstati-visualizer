@@ -1,0 +1,36 @@
+{
+  "name": "my-webpack-project",
+  "version": "1.0.0",
+  "description": "My webpack project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=production --node-env=production",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "watch": "webpack --watch",
+    "serve": "webpack serve"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "@webpack-cli/generators": "^2.4.2",
+    "babel-loader": "^8.2.4",
+    "css-loader": "^6.7.1",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  },
+  "dependencies": {
+    "chart.js": "^3.7.1",
+    "chartjs-adapter-date-fns": "^2.0.0",
+    "core-js": "^3.21.1",
+    "date-fns": "^2.28.0",
+    "jquery-ui": "^1.13.1",
+    "jquery-ui-slider": "^1.12.1",
+    "regenerator-runtime": "^0.13.9"
+  }
+}

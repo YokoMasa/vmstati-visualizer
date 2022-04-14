@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <script src="main.js"></script>
+        <link href="main.css" rel="stylesheet"/>
+        <title>vmstat visualizer</title>
+    </head>
+    <body>
+        <main>
+            <div class="header">
+                <h1>vmstat visualizer</h1>
+                <a href="/jp" class="langLink">Japanese / 日本語</a>
+            </div>
+
+            <p>Made by <a href="https://github.com/YokoMasa">Masato Yokota</a></p>
+
+            <div class="description">
+                <h2>What is this?</h2>
+                This tool can visualize your vmstat log file. You can see how resources (CPU, Memory...) on your server are used in a time span.
+                <h2>How can I use this?</h2>
+                <div class="description-block">
+                    <h3>1. Execute vmstat</h3>
+                    Execute the following vmstat command on a server. Quit with Ctrl+C when you want to stop monitoring.
+                    <code>
+                        vmstat -a -SM -w -t 1 | tee vmstat.log
+                    </code>
+                </div>
+                <div class="description-block">
+                    <h3>2. Upload vmstat.log</h3>
+                    Upload "vmstat.log" you got from step 1.
+                    <p>
+                        <input type="file" id="logfile_input"/>
+                    </p>
+                    * The file you select is not actually uploaded to anywhere. It is processed locally on your computer.
+                </div>
+            </div>
+           
+            <div class="rangeSelector">
+                <div style="color: red; display: none;" id="v-error-time">End time must be later than start time</div>
+                <label>Time span: </label>
+                <input id="startTime" type="datetime-local" step="1" disabled>
+                <span>～</span>
+                <input id="endTime" type="datetime-local" step="1" disabled>
+                <button id="rangeResetButton" class="rangeResetButton" disabled>reset time span</button>
+            </div>
+            <div class="chart-block">
+                <h3>CPU</h3>
+                <canvas id="chart_cpu" width="800" height="400"></canvas>
+            </div>
+            <div class="chart-block">
+                <h3>Memory</h3>
+                <label>Max memory size: </label>
+                <input id="max_memory" type="number">
+                <canvas id="chart_memory" width="800" height="400"></canvas>
+            </div>
+            <div class="chart-block">
+                <h3>Processes</h3>
+                <canvas id="chart_procs" width="800" height="400"></canvas>
+            </div>
+            <div class="chart-block">
+                <h3>IO</h3>
+                <canvas id="chart_io" width="800" height="400"></canvas>
+            </div>
+            <div class="chart-block">
+                <h3>System</h3>
+                <canvas id="chart_system" width="800" height="400"></canvas>
+            </div>
+            <div class="chart-block">
+                <h3>Swap</h3>
+                <canvas id="chart_swap" width="800" height="400"></canvas>
+            </div>
+        </main>
+    </body>
+</html>

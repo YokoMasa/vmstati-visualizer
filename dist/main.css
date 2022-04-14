@@ -1,0 +1,71 @@
+@font-face {
+    font-family: 'Noto Serif JP';
+    src: url("./NotoSerifJP-Regular.otf") format("opentype");
+}
+
+body {
+    font-family: 'Noto Serif JP', serif;
+}
+
+main {
+    margin-right: auto;
+    margin-left: auto;
+    width: 800px;
+}
+
+h1 {
+    font-size: 35pt;
+}
+
+h2 {
+    font-size: 28pt;
+}
+
+h3 {
+    margin: 17px 0 10px 0;
+}
+
+a {
+    color: black;
+}
+
+code {
+    display: block;
+    background-color: #f6f6f6;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.description {
+    border: solid 1px #ddd;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.description-block {
+    margin: 20px 0;
+}
+
+.rangeSelector {
+    margin: 60px 0 20px 0;
+    padding: 10px;
+}
+
+.rangeResetButton {
+    float: right;
+}
+
+.chart-block {
+    margin-bottom: 80px;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header h1 {
+    flex-grow: 1;
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <script src="/main.js"></script>
+        <link href="/main.css" rel="stylesheet"/>
+        <title>vmstat visualizer</title>
+    </head>
+    <body>
+        <main>
+            <div class="header">
+                <h1>vmstat visualizer</h1>
+                <a href="/" class="langLink">English</a>
+            </div>
+
+            <p>Made by <a href="https://github.com/YokoMasa">Masato Yokota</a></p>
+
+            <div class="description">
+                <h2>このツールについて</h2>
+                このツールはvmstatのログファイルをグラフにして可視化することができます。サーバのリソース（CPUやメモリ等）の使用状況を時系列的に確認できます。
+                <h2>使い方</h2>
+                <div class="description-block">
+                    <h3>1. vmstatの実行</h3>
+                    リソース状況を確認したい対象サーバで下記コマンドを実行します。ログを出し続けるので終了したい時はCtrl+Cで終了してください。
+                    <code>
+                        vmstat -a -SM -w -t 1 | tee vmstat.log
+                    </code>
+                </div>
+                <div class="description-block">
+                    <h3>2. vmstat.logをアップロード</h3>
+                    1. で取得した「vmstat.log」をアップロードします。
+                    <p>
+                        <input type="file" id="logfile_input"/>
+                    </p>
+                    ※実際にはどこにもアップロードされることは無く、ローカルコンピューター上でログファイルが処理されます。
+                </div>
+            </div>
+           
+            <div class="rangeSelector">
+                <div style="color: red; display: none;" id="v-error-time">開始時間 < 終了時間となるよう設定してください。</div>
+                <label>表示時間: </label>
+                <input id="startTime" type="datetime-local" step="1" disabled>
+                <span>～</span>
+                <input id="endTime" type="datetime-local" step="1" disabled>
+                <button id="rangeResetButton" class="rangeResetButton" disabled>表示時間リセット</button>
+            </div>
+            <div class="chart-block">
+                <h3>CPU</h3>
+                <canvas id="chart_cpu" width="800" height="400"></canvas>
+            </div>
+            <div class="chart-block">
+                <h3>メモリ</h3>
+                <label>最大メモリサイズ: </label>
+                <input id="max_memory" type="number">
+                <canvas id="chart_memory" width="800" height="400"></canvas>
+            </div>
+            <div class="chart-block">
+                <h3>プロセス</h3>
+                <canvas id="chart_procs" width="800" height="400"></canvas>
+            </div>
+            <div class="chart-block">
+                <h3>IO</h3>
+                <canvas id="chart_io" width="800" height="400"></canvas>
+            </div>
+            <div class="chart-block">
+                <h3>システム</h3>
+                <canvas id="chart_system" width="800" height="400"></canvas>
+            </div>
+            <div class="chart-block">
+                <h3>スワップ</h3>
+                <canvas id="chart_swap" width="800" height="400"></canvas>
+            </div>
+        </main>
+    </body>
+</html>
